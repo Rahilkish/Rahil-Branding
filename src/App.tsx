@@ -6,7 +6,7 @@
 import Hero from './components/Hero';
 import Work from './components/Work';
 import Archive from './components/Archive';
-import BentoGrid from './components/BentoGrid';
+import Process from './components/Process';
 import Contact from './components/Contact';
 import CustomCursor from './components/CustomCursor';
 import Navbar from './components/Navbar';
@@ -23,12 +23,10 @@ export default function App() {
     if (isLoading) return;
     
     const lenis = new Lenis();
-
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-
     requestAnimationFrame(raf);
     
     return () => {
@@ -58,7 +56,7 @@ export default function App() {
       
       <main>
         <Hero />
-        <BentoGrid />
+        <Process />
         <Work />
         <Archive />
         <Contact />
