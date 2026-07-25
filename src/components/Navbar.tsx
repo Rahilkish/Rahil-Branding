@@ -1,22 +1,33 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'motion/react';
+import { motion, useScroll, useTransform, useMotionValueEvent } from 'motion/react';
 import Magnetic from './Magnetic';
 
 export default function Navbar() {
   const { scrollY } = useScroll();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   
   const bgOpacity = useTransform(scrollY, [0, 100], [0, 0.8]);
   const blur = useTransform(scrollY, [0, 100], [0, 12]);
 
-  useEffect(() => {
-    return scrollY.onChange((latest) => {
-      setIsScrolled(latest > 50);
-    });
-  }, [scrollY]);
+  useMotionValueEvent(scrollY, "change", (latest) => {
+    const previous = scrollY.getPrevious() ?? 0;
+    if (latest > previous && latest > 150) {
+      setHidden(true);
+    } else {
+      setHidden(false);
+    }
+    setIsScrolled(latest > 50);
+  });
 
   return (
     <motion.header 
+      variants={{
+        visible: { y: 0 },
+        hidden: { y: "-100%" }
+      }}
+      animate={hidden ? "hidden" : "visible"}
+      transition={{ duration: 0.35, ease: "easeInOut" }}
       className={`fixed top-0 left-0 right-0 z-50 px-6 md:px-12 lg:px-24 py-6 flex justify-between items-center transition-colors duration-500`}
       style={{ 
         backgroundColor: `rgba(248, 248, 246, ${bgOpacity.get()})`,
@@ -24,7 +35,7 @@ export default function Navbar() {
       }}
     >
       <Magnetic>
-        <a href="#hero" className="font-serif text-xl tracking-tight block px-4 py-2" data-cursor="hover">
+        <a href="#hero" onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }} className="font-serif text-xl tracking-tight block px-4 py-2" data-cursor="hover">
           Rahil<span className="italic">.</span>
         </a>
       </Magnetic>

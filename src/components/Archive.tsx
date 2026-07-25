@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 const ARCHIVE_ITEMS = [
-  "https://images.unsplash.com/photo-1611532736597-de2d4265fba3?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1557672172-298e090bd0f1?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1583407723467-9b2dca250355?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1549490349-8643362247b5?auto=format&fit=crop&q=80",
-  "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80",
+  "/archive-1.jpg",
+  "/archive-2.jpg",
+  "/archive-3.jpg",
+  "/archive-4.jpg",
+  "/archive-5.jpg",
 ];
 
 export default function Archive() {

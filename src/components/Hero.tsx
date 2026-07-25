@@ -47,7 +47,7 @@ export default function Hero() {
         transition={{ type: "spring", stiffness: 200, damping: 20, delay: 0.5 }}
       >
         <span className="text-[10px] md:text-[11px] font-medium uppercase tracking-[0.2em] leading-[1.6]">
-          Rahil<br/>Identity &<br/>Motion<br/>Est. 2026
+          Interactive<br/>Design<br/>Studio
         </span>
       </motion.div>
 

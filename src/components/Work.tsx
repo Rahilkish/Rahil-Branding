@@ -1,5 +1,7 @@
 import { motion, AnimatePresence } from 'motion/react';
 import React, { useState, useEffect } from 'react';
+import { X } from 'lucide-react';
+import { createPortal } from 'react-dom';
 
 const WORK_ITEMS = [
   {
@@ -126,63 +128,112 @@ export default function Work() {
       </div>
 
       {/* Full Screen Modal */}
-      <AnimatePresence>
-        {activeProject && (
+      {typeof document !== 'undefined' && createPortal(
+        <AnimatePresence>
+          {activeProject && (
           <motion.div 
+            key="work-modal"
             initial={{ y: "100%", opacity: 0 }}
             animate={{ y: "0%", opacity: 1 }}
             exit={{ y: "100%", opacity: 0 }}
             transition={{ type: "spring", stiffness: 300, damping: 30 }}
             className="fixed inset-0 z-[300] bg-sand overflow-y-auto"
-            data-cursor="hover"
+            data-cursor="auto"
+            data-lenis-prevent="true"
           >
             <div 
-              className="absolute top-8 right-8 z-[310] cursor-pointer"
+              className="fixed top-8 right-8 md:top-12 md:right-12 z-[9999] cursor-pointer bg-charcoal text-sand hover:bg-black p-3 md:p-4 rounded-full shadow-2xl transition-all duration-300 flex items-center justify-center border border-sand/10"
               onClick={() => setActiveProject(null)}
               data-cursor="hover"
             >
-              <span className="text-xs font-medium uppercase tracking-[0.2em] border border-charcoal/20 px-6 py-3 rounded-full hover:bg-charcoal hover:text-sand transition-colors bg-sand">
-                Close
-              </span>
+              <X size={24} strokeWidth={1.5} />
             </div>
 
             {/* Modal Content */}
-            <div className="min-h-screen">
-              <div className="h-[70vh] w-full relative">
-                <img 
+            <div className="min-h-screen pb-32">
+              <div className="h-[80vh] w-full relative overflow-hidden">
+                <motion.img 
+                  initial={{ scale: 1.1 }}
+                  animate={{ scale: 1 }}
+                  transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                   src={WORK_ITEMS.find(w => w.id === activeProject)?.image} 
                   alt="cover" 
-                  className="w-full h-full object-cover filter grayscale"
+                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-1000"
                 />
                 <div className="absolute inset-0 bg-charcoal/20"></div>
-                <div className="absolute bottom-12 left-6 md:left-12 lg:left-24 text-sand">
-                  <h3 className="font-serif text-6xl md:text-8xl lg:text-[10rem] tracking-tighter uppercase leading-[0.8]">
+                <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 lg:p-24 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex flex-col justify-end text-sand">
+                  <motion.h3 
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-serif text-[15vw] md:text-[12vw] lg:text-[10rem] tracking-tighter uppercase leading-[0.85] text-sand"
+                  >
                     {WORK_ITEMS.find(w => w.id === activeProject)?.title}
-                  </h3>
+                  </motion.h3>
+                  <motion.div 
+                    initial={{ y: 20, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-8 text-sm md:text-base font-medium uppercase tracking-[0.2em]"
+                  >
+                    {WORK_ITEMS.find(w => w.id === activeProject)?.category}
+                  </motion.div>
                 </div>
               </div>
 
-              <div className="px-6 md:px-12 lg:px-24 py-24 max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-16">
-                <div className="md:col-span-4">
-                  <h4 className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal/50 mb-4">The Brief</h4>
-                  <p className="text-lg text-charcoal/80 leading-relaxed">
+              <div className="px-6 md:px-12 lg:px-24 pt-24 md:pt-40 max-w-[100rem] mx-auto grid grid-cols-1 md:grid-cols-12 gap-16 md:gap-24">
+                <motion.div 
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8 }}
+                  className="md:col-span-4 lg:col-span-3"
+                >
+                  <h4 className="text-xs font-bold uppercase tracking-[0.2em] text-charcoal/40 mb-8 border-b border-charcoal/10 pb-4">The Brief</h4>
+                  <p className="text-xl md:text-2xl text-charcoal leading-relaxed font-serif">
                     {WORK_ITEMS.find(w => w.id === activeProject)?.description}
                   </p>
-                </div>
+                </motion.div>
                 
-                <div className="md:col-span-8 space-y-8">
-                  <div className="aspect-[16/9] bg-charcoal/10 flex items-center justify-center italic text-charcoal/40 text-sm">
-                    [Process Shot 1]
-                  </div>
-                  <div className="aspect-[4/5] bg-charcoal/10 flex items-center justify-center italic text-charcoal/40 text-sm">
-                    [Process Shot 2]
+                <div className="md:col-span-8 lg:col-span-9 flex flex-col gap-8 md:gap-16 mt-8 md:mt-0">
+                  <motion.div 
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.8 }}
+                    className="w-full aspect-[16/9] overflow-hidden bg-charcoal/5 rounded-sm relative group"
+                  >
+                    <img src={WORK_ITEMS.find(w => w.id === activeProject)?.image} alt="Process 1" className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" />
+                  </motion.div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.8, delay: 0.1 }}
+                      className="w-full aspect-[4/5] overflow-hidden bg-charcoal/5 rounded-sm relative group"
+                    >
+                      <img src={WORK_ITEMS.find(w => w.id === activeProject)?.image} alt="Process 2" className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000 object-left scale-100 group-hover:scale-105" />
+                    </motion.div>
+                    <motion.div 
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      className="w-full aspect-[4/5] overflow-hidden bg-charcoal/5 rounded-sm mt-0 md:mt-24 relative group"
+                    >
+                      <img src={WORK_ITEMS.find(w => w.id === activeProject)?.image} alt="Process 3" className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000 object-right scale-100 group-hover:scale-105" />
+                    </motion.div>
                   </div>
                 </div>
               </div>
             </div>
           </motion.div>
-        )}
-      </AnimatePresence>
+          )}
+        </AnimatePresence>,
+        document.body
+      )}
     </section>
   );
 }
