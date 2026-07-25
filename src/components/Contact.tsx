@@ -1,4 +1,6 @@
 import { motion } from 'motion/react';
+import { Instagram, Linkedin } from 'lucide-react';
+import { SiBehance } from '@icons-pack/react-simple-icons';
 import Magnetic from './Magnetic';
 
 export default function Contact() {
@@ -18,7 +20,7 @@ export default function Contact() {
         
         <Magnetic>
           <motion.a 
-            href="mailto:rahilrkishnani@gmail.com"
+            href="mailto:rahil.designworks@gmail.com"
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -29,15 +31,35 @@ export default function Contact() {
             Start a Conversation
           </motion.a>
         </Magnetic>
+
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
+          className="flex gap-4 sm:gap-6 mt-12"
+        >
+          <Magnetic>
+            <a href="https://instagram.com/rahil_kishnani" target="_blank" rel="noreferrer" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-sand/30 hover:border-sand hover:bg-sand hover:text-charcoal transition-all duration-300 flex items-center justify-center text-sand/80 hover:text-charcoal" data-cursor="hover" aria-label="Instagram">
+              <Instagram strokeWidth={1.5} size={24} />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a href="https://www.linkedin.com/in/rahil-kishnani/" target="_blank" rel="noreferrer" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-sand/30 hover:border-sand hover:bg-sand hover:text-charcoal transition-all duration-300 flex items-center justify-center text-sand/80 hover:text-charcoal" data-cursor="hover" aria-label="LinkedIn">
+              <Linkedin strokeWidth={1.5} size={24} />
+            </a>
+          </Magnetic>
+          <Magnetic>
+            <a href="https://www.behance.net/rahilkishnani" target="_blank" rel="noreferrer" className="w-14 h-14 sm:w-16 sm:h-16 rounded-full border border-sand/30 hover:border-sand hover:bg-sand hover:text-charcoal transition-all duration-300 flex items-center justify-center text-sand/80 hover:text-charcoal" data-cursor="hover" aria-label="Behance">
+              <SiBehance size={24} />
+            </a>
+          </Magnetic>
+        </motion.div>
       </div>
       
       <footer className="mt-24 pt-8 border-t border-sand/20 flex flex-col md:flex-row justify-between items-center gap-6 text-xs text-sand/50 uppercase tracking-[0.2em]">
-        <span>&copy; {new Date().getFullYear()} Rahil</span>
-        <div className="flex gap-8">
-          <a href="#" className="hover:text-sand transition-colors" data-cursor="hover">Instagram</a>
-          <a href="#" className="hover:text-sand transition-colors" data-cursor="hover">LinkedIn</a>
-          <a href="#" className="hover:text-sand transition-colors" data-cursor="hover">Behance</a>
-        </div>
+        <span>&copy; {new Date().getFullYear()} Rahil Kishnani</span>
+        <span>Based in the World</span>
       </footer>
     </section>
   );
