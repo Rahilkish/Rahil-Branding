@@ -1,166 +1,134 @@
-import { motion, useScroll, useTransform } from 'motion/react';
-import React, { useRef } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import React, { useState } from 'react';
 
 const PROCESS_STEPS = [
   {
     num: "01",
     title: "Discovery & Strategy",
-    description: "We dive deep into your brand's core truth, understanding your vision, audience, and market landscape to establish a solid strategic foundation.",
+    description: "We dive deep into your brand's core truth, understanding your vision, audience, and market landscape to establish a solid strategic foundation that informs every design decision.",
     image: "https://images.unsplash.com/photo-1512314889357-e157c22f938d?q=80&w=2671&auto=format&fit=crop"
   },
   {
     num: "02",
     title: "Conceptualization",
-    description: "Translating strategy into visual directions. We explore moodboards, typographic pairings, and initial concepts that capture the brand's essence.",
+    description: "Translating strategy into visual directions. We explore moodboards, typographic pairings, and initial concepts that capture the brand's essence and differentiate it in the market.",
     image: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=2664&auto=format&fit=crop"
   },
   {
     num: "03",
     title: "Design & Execution",
-    description: "Crafting the final identity. This includes logo design, color palettes, typography systems, and the comprehensive visual language.",
+    description: "Crafting the final identity. This includes logo design, color palettes, typography systems, and a comprehensive visual language that is both beautiful and functional.",
     image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=2564&auto=format&fit=crop"
   },
   {
     num: "04",
     title: "Application",
-    description: "Bringing the brand to life across various touchpoints. From packaging and stationery to digital platforms and physical spaces.",
+    description: "Bringing the brand to life across various touchpoints. From packaging and stationery to digital platforms and physical spaces, ensuring a cohesive experience everywhere.",
     image: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=2574&auto=format&fit=crop"
   },
   {
     num: "05",
     title: "Delivery",
-    description: "Handover of meticulously organized assets and comprehensive brand guidelines to ensure consistency moving forward.",
+    description: "Handover of meticulously organized assets and comprehensive brand guidelines to ensure consistency moving forward and empower your team to use the new identity.",
     image: "https://images.unsplash.com/photo-1497215842964-222b430dc094?q=80&w=2667&auto=format&fit=crop"
   }
 ];
 
-function ProcessStep({ step, index }: { step: any, index: number, key?: React.Key }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 40, filter: "blur(10px)" }}
-      whileInView={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 1, delay: 0.1, ease: [0.16, 1, 0.3, 1] }}
-      className="w-[85vw] md:w-[60vw] lg:w-[45vw] flex-shrink-0 flex flex-col gap-6 group relative"
-    >
-      {/* Huge Background Number */}
-      <div className="absolute -top-12 -left-4 md:-top-20 md:-left-8 font-serif text-[8rem] md:text-[14rem] italic text-sand/5 z-0 pointer-events-none group-hover:text-sand/10 transition-colors duration-700 leading-none select-none">
-        {step.num}
-      </div>
-
-      <div className="overflow-hidden aspect-[16/10] rounded-sm relative z-10 shadow-2xl">
-        <div className="absolute inset-0 bg-charcoal/40 group-hover:bg-transparent transition-colors duration-500 z-20 pointer-events-none" />
-
-        <motion.div
-          initial={{ scale: 1.1, clipPath: "inset(0 100% 0 0)" }}
-          whileInView={{ scale: 1, clipPath: "inset(0 0% 0 0)" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-          className="w-full h-full"
-        >
-          <img
-            src={step.image}
-            alt={step.title}
-            className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-          />
-        </motion.div>
-      </div>
-
-      <div className="flex gap-6 md:gap-12 mt-4 md:mt-8 pt-8 relative z-10">
-        {/* Animated top border */}
-        <motion.div
-          initial={{ width: 0 }}
-          whileInView={{ width: "100%" }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute top-0 left-0 h-[1px] bg-sand/30"
-        />
-
-        <motion.div 
-          initial={{ opacity: 0, x: -20 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
-          className="font-serif text-4xl md:text-6xl italic text-sand/50 group-hover:text-sand transition-colors duration-500"
-        >
-          {step.num}
-        </motion.div>
-        
-        <div className="flex flex-col gap-4">
-          <motion.h3 
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="font-serif text-3xl md:text-4xl text-sand group-hover:italic transition-all duration-500"
-          >
-            {step.title}
-          </motion.h3>
-          <motion.p 
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="font-sans text-sand/70 max-w-md leading-relaxed text-sm md:text-base"
-          >
-            {step.description}
-          </motion.p>
-        </div>
-      </div>
-    </motion.div>
-  );
-}
-
 export default function Process() {
-  const targetRef = useRef<HTMLDivElement>(null);
-  
-  const { scrollYProgress } = useScroll({
-    target: targetRef,
-  });
-
-  const x = useTransform(scrollYProgress, [0, 1], ["5%", "-75%"]);
+  const [activeIndex, setActiveIndex] = useState(0);
 
   return (
-    <section ref={targetRef} id="about" className="relative h-[400vh] bg-charcoal text-sand z-10">
-      <div className="sticky top-0 flex h-screen items-center overflow-hidden">
+    <section id="about" className="relative bg-charcoal text-sand py-24 md:py-48 min-h-screen flex items-center z-10">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
+        
         {/* Section Header */}
-        <div className="absolute top-12 md:top-24 left-6 md:left-12 lg:left-24 z-20">
+        <div className="mb-16 md:mb-32">
           <motion.p 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="uppercase tracking-widest text-sm mb-4 text-sand/60"
+            className="uppercase tracking-widest text-sm mb-6 text-sand/60 font-mono"
           >
-            Our Approach
+            The Methodology
           </motion.p>
           <motion.h2 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="font-serif text-5xl md:text-7xl lg:text-8xl italic"
+            className="font-serif text-4xl md:text-6xl lg:text-7xl leading-[1.1] max-w-2xl"
           >
-            The Process
+            A disciplined <span className="italic text-sand/70">approach</span> to creation.
           </motion.h2>
         </div>
 
-        {/* Scrolling Content */}
-        <motion.div style={{ x }} className="flex gap-16 md:gap-32 pl-6 md:pl-12 lg:pl-[30vw] pt-32">
-          {PROCESS_STEPS.map((step, index) => (
-            <ProcessStep key={index} step={step} index={index} />
-          ))}
-        </motion.div>
-
-        {/* Global Progress Bar for Section */}
-        <div className="absolute bottom-12 md:bottom-24 left-6 md:left-12 lg:left-24 right-6 md:right-12 lg:right-24 flex items-center gap-4 z-20">
-          <span className="text-xs font-mono opacity-50">00</span>
-          <div className="flex-1 h-[1px] bg-sand/10 relative overflow-hidden">
-            <motion.div
-              className="absolute top-0 left-0 h-full bg-sand origin-left"
-              style={{ scaleX: scrollYProgress }}
-            />
+        <div className="flex flex-col md:flex-row gap-12 md:gap-24 relative items-start">
+          
+          {/* Left: The Index */}
+          <div className="w-full md:w-1/2 lg:w-7/12 flex flex-col">
+            {PROCESS_STEPS.map((step, index) => (
+              <div 
+                key={index}
+                onMouseEnter={() => setActiveIndex(index)}
+                onClick={() => setActiveIndex(index)}
+                className="group border-b border-sand/20 py-8 md:py-10 cursor-pointer relative"
+              >
+                <div className="flex items-baseline gap-6 md:gap-10 relative z-10">
+                  <span className={`font-mono text-sm transition-colors duration-500 ${activeIndex === index ? 'text-sand' : 'text-sand/30'}`}>
+                    {step.num}
+                  </span>
+                  <h3 className={`font-serif text-3xl md:text-5xl lg:text-6xl transition-all duration-500 ${activeIndex === index ? 'text-sand italic' : 'text-sand/40 group-hover:text-sand/70'}`}>
+                    {step.title}
+                  </h3>
+                </div>
+                
+                {/* Description & Mobile Image - reveals on active */}
+                <motion.div 
+                  initial={false}
+                  animate={{ 
+                    height: activeIndex === index ? 'auto' : 0,
+                    opacity: activeIndex === index ? 1 : 0,
+                    marginTop: activeIndex === index ? 24 : 0
+                  }}
+                  className="overflow-hidden"
+                >
+                  <div className="ml-0 md:ml-16 lg:ml-20">
+                    <p className="font-sans text-sand/70 leading-relaxed text-sm md:text-base max-w-md">
+                      {step.description}
+                    </p>
+                    
+                    {/* Mobile Image */}
+                    <div className="md:hidden aspect-[4/3] w-full overflow-hidden rounded-sm mt-8">
+                       <img 
+                         src={step.image} 
+                         alt={step.title} 
+                         className="w-full h-full object-cover filter grayscale" 
+                       />
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+            ))}
           </div>
-          <span className="text-xs font-mono opacity-50">05</span>
+
+          {/* Right: The Visual (Sticky on Desktop) */}
+          <div className="w-full md:w-1/2 lg:w-5/12 hidden md:block sticky top-32">
+            <div className="aspect-[4/5] w-full overflow-hidden rounded-sm relative">
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeIndex}
+                  src={PROCESS_STEPS[activeIndex].image}
+                  alt={PROCESS_STEPS[activeIndex].title}
+                  initial={{ opacity: 0, scale: 1.05, filter: "blur(10px) grayscale(100%)" }}
+                  animate={{ opacity: 1, scale: 1, filter: "blur(0px) grayscale(0%)" }}
+                  exit={{ opacity: 0, scale: 0.95, filter: "blur(10px) grayscale(100%)" }}
+                  transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+              </AnimatePresence>
+            </div>
+          </div>
+          
         </div>
       </div>
     </section>
