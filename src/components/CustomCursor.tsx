@@ -63,8 +63,8 @@ export default function CustomCursor() {
     default: {
       width: 16,
       height: 16,
-      x: "-50%",
-      y: "-50%",
+      marginLeft: -8,
+      marginTop: -8,
       backgroundColor: "#f8f8f6",
       mixBlendMode: "difference" as any,
       border: "0px solid transparent"
@@ -72,8 +72,8 @@ export default function CustomCursor() {
     hover: {
       width: 64,
       height: 64,
-      x: "-50%",
-      y: "-50%",
+      marginLeft: -32,
+      marginTop: -32,
       backgroundColor: "transparent",
       border: "1px solid #f8f8f6",
       mixBlendMode: "difference" as any,
@@ -81,8 +81,8 @@ export default function CustomCursor() {
     text: {
       width: 100,
       height: 100,
-      x: "-50%",
-      y: "-50%",
+      marginLeft: -50,
+      marginTop: -50,
       backgroundColor: "#f8f8f6",
       mixBlendMode: "difference" as any,
       border: "0px solid transparent"

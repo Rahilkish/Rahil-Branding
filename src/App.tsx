@@ -56,8 +56,8 @@ export default function App() {
       
       <main>
         <Hero />
-        <Process />
         <Work />
+        <Process />
         <Archive />
         <Contact />
       </main>

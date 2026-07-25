@@ -30,7 +30,7 @@ export default function Navbar() {
       </Magnetic>
       
       <nav className="hidden md:flex gap-4 text-[10px] font-bold uppercase tracking-[0.2em] text-[#1a1a1a]/80">
-        <Magnetic><a href="#bento" className="block px-4 py-2 hover:text-[#1a1a1a] transition-colors" data-cursor="hover">About</a></Magnetic>
+        <Magnetic><a href="#about" className="block px-4 py-2 hover:text-[#1a1a1a] transition-colors" data-cursor="hover">About</a></Magnetic>
         <Magnetic><a href="#work" className="block px-4 py-2 hover:text-[#1a1a1a] transition-colors" data-cursor="hover">Projects</a></Magnetic>
         <Magnetic><a href="#archive" className="block px-4 py-2 hover:text-[#1a1a1a] transition-colors" data-cursor="hover">Index</a></Magnetic>
         <Magnetic><a href="#contact" className="block px-4 py-2 hover:text-[#1a1a1a] transition-colors" data-cursor="hover">Contact</a></Magnetic>
