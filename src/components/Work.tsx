@@ -36,8 +36,12 @@ function WorkCard({ item, index, activeHover, setActiveHover, setActiveProject }
 
   return (
     <motion.div
-      className={`relative h-[60vh] md:h-[75vh] cursor-pointer overflow-hidden rounded-3xl transition-all duration-700 ease-[0.16,1,0.3,1] ${
-        isActive ? 'md:flex-[3] flex-[3]' : isAnyActive ? 'md:flex-[0.5] flex-[0.5]' : 'flex-1'
+      className={`relative cursor-pointer overflow-hidden rounded-3xl transition-all duration-700 ease-[0.16,1,0.3,1] w-full md:w-auto ${
+        isActive 
+          ? 'h-[60vh] md:h-[75vh] md:flex-[3]' 
+          : isAnyActive 
+            ? 'h-[15vh] md:h-[75vh] md:flex-[0.5]' 
+            : 'h-[40vh] md:h-[75vh] md:flex-1'
       }`}
       onMouseEnter={() => setActiveHover(item.id)}
       onMouseLeave={() => setActiveHover(null)}
