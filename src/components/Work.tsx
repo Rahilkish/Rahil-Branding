@@ -31,20 +31,34 @@ const WORK_ITEMS = [
 ];
 
 function WorkCard({ item, index, activeHover, setActiveHover, setActiveProject }: any) {
+  const [hasHover, setHasHover] = useState(true);
+  
+  useEffect(() => {
+    setHasHover(window.matchMedia('(hover: hover)').matches);
+  }, []);
+
   const isActive = activeHover === item.id;
   const isAnyActive = activeHover !== null;
+  const showDetails = !hasHover || isActive;
+  const showTitle = !hasHover || isActive || !isAnyActive;
 
   return (
     <motion.div
       className={`relative cursor-pointer overflow-hidden rounded-3xl transition-all duration-700 ease-[0.16,1,0.3,1] w-full md:w-auto ${
-        isActive 
-          ? 'h-[60vh] md:h-[75vh] md:flex-[3]' 
-          : isAnyActive 
-            ? 'h-[15vh] md:h-[75vh] md:flex-[0.5]' 
-            : 'h-[40vh] md:h-[75vh] md:flex-1'
+        hasHover
+          ? isActive 
+            ? 'h-[60vh] md:h-[75vh] md:flex-[3]' 
+            : isAnyActive 
+              ? 'h-[15vh] md:h-[75vh] md:flex-[0.5]' 
+              : 'h-[40vh] md:h-[75vh] md:flex-1'
+          : 'h-[40vh] md:h-[75vh]'
       }`}
-      onMouseEnter={() => setActiveHover(item.id)}
-      onMouseLeave={() => setActiveHover(null)}
+      onMouseEnter={() => {
+        if (hasHover) setActiveHover(item.id);
+      }}
+      onMouseLeave={() => {
+        if (hasHover) setActiveHover(null);
+      }}
       onClick={() => setActiveProject(item.id)}
       data-cursor="view"
       style={{ backgroundColor: item.color }}
@@ -54,7 +68,7 @@ function WorkCard({ item, index, activeHover, setActiveHover, setActiveProject }
           src={item.image} 
           alt={item.title} 
           className="w-full h-full object-cover opacity-80 mix-blend-multiply filter transition-all duration-700 grayscale hover:grayscale-0" 
-          style={{ transform: isActive ? 'scale(1.05)' : 'scale(1)' }}
+          style={{ transform: showDetails ? 'scale(1.05)' : 'scale(1)' }}
         />
       </div>
       
@@ -62,7 +76,7 @@ function WorkCard({ item, index, activeHover, setActiveHover, setActiveProject }
         <div className="flex justify-between items-start">
           <motion.span 
             className="text-xs md:text-sm font-medium uppercase tracking-[0.2em] border border-white/20 px-6 py-3 rounded-full backdrop-blur-md bg-black/20 whitespace-nowrap overflow-hidden"
-            animate={{ opacity: isActive ? 1 : 0, width: isActive ? 'auto' : 0, padding: isActive ? '12px 24px' : '0px' }}
+            animate={{ opacity: showDetails ? 1 : 0, width: showDetails ? 'auto' : 0, padding: showDetails ? '12px 24px' : '0px' }}
             transition={{ duration: 0.4 }}
           >
             {item.category}
@@ -76,8 +90,8 @@ function WorkCard({ item, index, activeHover, setActiveHover, setActiveProject }
           <motion.h3 
             className="font-serif text-5xl md:text-7xl lg:text-[7rem] tracking-tighter uppercase leading-[0.8] drop-shadow-lg"
             animate={{ 
-              opacity: isActive || !isAnyActive ? 1 : 0,
-              y: isActive || !isAnyActive ? 0 : 20
+              opacity: showTitle ? 1 : 0,
+              y: showTitle ? 0 : 20
             }}
             transition={{ duration: 0.5 }}
           >
