@@ -246,28 +246,28 @@ export default function Work() {
                 </div>
               </div>
 
-              <div className="w-full mt-16 md:mt-24 px-4 md:px-8 lg:px-12 max-w-[120rem] mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
-                {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[3] && (
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="w-full md:col-span-5 overflow-hidden relative group flex items-center justify-center py-12 md:py-16"
-                  >
-                    <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[3]} alt="Process 4" className="w-[85%] h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
-                  </motion.div>
-                )}
-
+              <div className="w-full mt-16 md:mt-24 px-4 md:px-8 lg:px-12 max-w-[120rem] mx-auto flex flex-col gap-16 md:gap-24">
                 {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[2] && (
                   <motion.div 
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.8, delay: 0.3 }}
-                    className="w-full md:col-span-7 overflow-hidden relative group flex items-center justify-center"
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="w-full md:w-3/5 lg:w-1/2 overflow-hidden relative group self-start"
                   >
                     <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[2]} alt="Process 3" className="w-full h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
+                  </motion.div>
+                )}
+
+                {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[3] && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="w-full overflow-hidden relative group"
+                  >
+                    <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[3]} alt="Process 4" className="w-full h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
                   </motion.div>
                 )}
               </div>
