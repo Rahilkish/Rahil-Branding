@@ -1,13 +1,11 @@
 import { motion } from 'motion/react';
-import React, { useState } from 'react';
+import React from 'react';
 import { Instagram, Linkedin, Mail } from 'lucide-react';
 import { SiBehance } from '@icons-pack/react-simple-icons';
 import Magnetic from './Magnetic';
 
 
 export default function About() {
-  const [showMoreInfo, setShowMoreInfo] = useState(false);
-
       return (
     <section id="about" className="relative bg-charcoal text-sand py-24 md:py-32 flex items-center z-10">
       <div className="max-w-7xl mx-auto px-6 md:px-12 w-full relative">
@@ -52,11 +50,9 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: 0.1 }}
-                className="font-serif text-4xl md:text-5xl lg:text-7xl leading-[1.1] mb-8 text-sand"
+                className="font-serif text-3xl md:text-4xl lg:text-5xl leading-[1.2] mb-8 text-sand max-w-2xl"
               >
-                I'm Rahil.<br />
-                Designer, maker,<br className="hidden md:block" />
-                and strategist.
+                I'm Rahil, a design student with a focus on brand identity.
               </motion.h2>
               
               <motion.div
@@ -67,32 +63,14 @@ export default function About() {
                 className="flex flex-col gap-6"
               >
                 <p className="font-sans text-sand leading-relaxed md:text-lg max-w-xl">
-                  Based in Kolkata, I partner with founders to build brands that are grounded in reality—stress-tested against real constraints, not just moodboards.
+                  Logos, colour and type systems, and the collateral that carries a brand into the real world.
                 </p>
                 <p className="font-sans text-sand leading-relaxed md:text-lg max-w-xl">
-                  Beyond the screen, I build with my hands. Glass, wood, brass casting, and 3D printing. Understanding physical materials fundamentally changes how I design digital systems.
+                  I care about brands that feel considered rather than templated. Every choice should earn its place, not just look nice. I like working with people who want their brand to feel like it was actually thought through, not assembled from a template.
                 </p>
-
-                <motion.div
-                  initial={false}
-                  animate={{ 
-                    height: showMoreInfo ? 'auto' : 0, 
-                    opacity: showMoreInfo ? 1 : 0,
-                    marginTop: showMoreInfo ? 8 : 0
-                  }}
-                  className="overflow-hidden"
-                >
-                  <p className="font-sans text-sand leading-relaxed md:text-lg max-w-xl pb-2">
-                    I believe that strong design isn't just aesthetic—it's structural. From concept to execution, I bring a systematic approach to creativity, ensuring every touchpoint communicates your core vision. Whether iterating through CAD models or designing responsive interfaces, the goal is always clear, functional, and enduring.
-                  </p>
-                </motion.div>
-
-                <button
-                  onClick={() => setShowMoreInfo(!showMoreInfo)}
-                  className="text-left font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-sand/50 hover:text-sand transition-colors mt-2 underline decoration-sand/30 hover:decoration-sand underline-offset-4 w-fit"
-                >
-                  {showMoreInfo ? 'Less about me' : 'More about me'}
-                </button>
+                <p className="font-sans text-sand leading-relaxed md:text-lg max-w-xl pb-2">
+                  If you're building something and want it to look like you meant it, that's where I come in.
+                </p>
 
                 <div className="flex gap-4 mt-2">
                   <Magnetic>
