@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 
 const ARCHIVE_ITEMS = [
-  "/archive-1.jpg",
-  "/archive-2.jpg",
-  "/archive-3.jpg",
-  "/archive-4.jpg",
-  "/archive-5.jpg",
+  { src: "/archive-1.png", isLandscape: false },
+  { src: "/archive-2.png", isLandscape: false },
+  { src: "/archive-3-1.png", isLandscape: true },
+  { src: "/archive-4.png", isLandscape: false },
+  { src: "/archive-5.png", isLandscape: false },
 ];
 
 export default function Archive() {
@@ -50,17 +50,17 @@ export default function Archive() {
         >
           {[1, 2].map((set) => (
             <div key={set} className="flex gap-6 md:gap-12 px-3 md:px-6">
-              {ARCHIVE_ITEMS.map((src, i) => (
+              {ARCHIVE_ITEMS.map((item, i) => (
                 <div 
                   key={`${set}-${i}`} 
-                  onClick={() => setSelectedImage(src)}
-                  className="w-[70vw] md:w-[35vw] aspect-[3/4] shrink-0 relative group border border-sand/10 bg-sand/5 p-4 md:p-8 cursor-pointer"
+                  onClick={() => setSelectedImage(item.src)}
+                  className={`h-[93vw] md:h-[46vw] ${item.isLandscape ? 'aspect-[1.414/1]' : 'aspect-[3/4]'} shrink-0 relative group border border-sand/10 bg-sand/5 p-2 md:p-4 cursor-pointer`}
                   data-cursor="hover"
                 >
                   <img 
-                    src={src} 
+                    src={item.src} 
                     alt="Archive item" 
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none" 
+                    className="w-full h-full object-contain transition-all duration-700 pointer-events-none" 
                   />
                 </div>
               ))}
@@ -75,17 +75,17 @@ export default function Archive() {
         >
           {[1, 2].map((set) => (
             <div key={set} className="flex gap-6 md:gap-12 px-3 md:px-6">
-              {[...ARCHIVE_ITEMS].reverse().map((src, i) => (
+              {[...ARCHIVE_ITEMS].reverse().map((item, i) => (
                 <div 
                   key={`${set}-${i}`} 
-                  onClick={() => setSelectedImage(src)}
-                  className="w-[50vw] md:w-[25vw] aspect-[4/5] shrink-0 relative group border border-sand/10 bg-sand/5 p-4 md:p-8 cursor-pointer"
+                  onClick={() => setSelectedImage(item.src)}
+                  className={`h-[62vw] md:h-[31vw] ${item.isLandscape ? 'aspect-[1.414/1]' : 'aspect-[4/5]'} shrink-0 relative group border border-sand/10 bg-sand/5 p-2 md:p-4 cursor-pointer`}
                   data-cursor="hover"
                 >
                   <img 
-                    src={src} 
+                    src={item.src} 
                     alt="Archive item" 
-                    className="w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-700 pointer-events-none" 
+                    className="w-full h-full object-contain transition-all duration-700 pointer-events-none" 
                   />
                 </div>
               ))}

@@ -9,24 +9,29 @@ const WORK_ITEMS = [
     title: 'Otaaq',
     category: 'Brand Identity',
     description: 'Full brand system built for a café currently under construction; strategy, logo direction, colour palette.',
-    image: 'https://images.unsplash.com/photo-1559925393-8be0ec4767c8?auto=format&fit=crop&q=80',
+    coverImage: '/otaaq/Otaaq main.png',
+    processImages: [
+      '/otaaq/Lofo Icon B.png',
+      '/otaaq/Logo Icon O.png',
+      '/otaaq/cup collateral.png',
+      '/otaaq/Final.png'
+    ],
     color: '#e4dccf' // Warm off-white
   },
   {
     id: 'play-haus',
     title: 'Play-Haus',
     category: 'Brand Identity',
-    description: 'Comprehensive branding project encompassing visual identity, motion framework, and physical collaterals. Details and documentation to be added.',
-    image: 'https://images.unsplash.com/photo-1572949645841-094f3a9c4c94?auto=format&fit=crop&q=80',
-    color: '#2a2a2a' // Dark
-  },
-  {
-    id: 'lumina',
-    title: 'Lumina',
-    category: 'Digital Concept',
-    description: 'An experimental digital platform focusing on light, interaction, and spatial computing.',
-    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&q=80',
-    color: '#1a1a1a'
+    description: 'Comprehensive branding project encompassing visual identity, motion framework, and physical collaterals.',
+    coverImage: '/play-haus/pic 2.png',
+    processImages: [
+      '/play-haus/both logos.png',
+      '/play-haus/pic 1.png',
+      '/play-haus/pic 2.png',
+      '/play-haus/playhaus collateral.png',
+      '/play-haus/color selection.png'
+    ],
+    color: '#d4c5b9' // Lighter warm tone
   }
 ];
 
@@ -63,13 +68,13 @@ function WorkCard({ item, index, activeHover, setActiveHover, setActiveProject }
       data-cursor="view"
       style={{ backgroundColor: item.color }}
     >
-      <div className="absolute inset-0 w-full h-full">
+      <div className="absolute inset-0 w-full h-full overflow-hidden">
         <img 
-          src={item.image} 
+          src={item.coverImage} 
           alt={item.title} 
-          className="w-full h-full object-cover opacity-80 mix-blend-multiply filter transition-all duration-700 grayscale hover:grayscale-0" 
-          style={{ transform: showDetails ? 'scale(1.05)' : 'scale(1)' }}
+          className="w-full h-full object-cover opacity-80 mix-blend-multiply filter blur-[6px] scale-110 transition-all duration-700 hover:opacity-100 hover:blur-none" 
         />
+        <div className="absolute inset-0 bg-gradient-to-tr from-white/20 to-transparent mix-blend-overlay pointer-events-none" />
       </div>
       
       <div className="absolute inset-0 p-6 md:p-10 flex flex-col justify-between text-white pointer-events-none">
@@ -174,9 +179,9 @@ export default function Work() {
                   initial={{ scale: 1.1 }}
                   animate={{ scale: 1 }}
                   transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                  src={WORK_ITEMS.find(w => w.id === activeProject)?.image} 
+                  src={WORK_ITEMS.find(w => w.id === activeProject)?.coverImage} 
                   alt="cover" 
-                  className="w-full h-full object-cover filter grayscale hover:grayscale-0 transition-all duration-1000"
+                  className="w-full h-full object-cover transition-all duration-1000"
                 />
                 <div className="absolute inset-0 bg-charcoal/20"></div>
                 <div className="absolute bottom-0 left-0 w-full p-6 md:p-12 lg:p-24 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex flex-col justify-end text-sand">
@@ -214,38 +219,70 @@ export default function Work() {
                 </motion.div>
                 
                 <div className="md:col-span-8 lg:col-span-9 flex flex-col gap-8 md:gap-16 mt-8 md:mt-0">
-                  <motion.div 
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-10%" }}
-                    transition={{ duration: 0.8 }}
-                    className="w-full aspect-[16/9] overflow-hidden bg-charcoal/5 rounded-sm relative group"
-                  >
-                    <img src={WORK_ITEMS.find(w => w.id === activeProject)?.image} alt="Process 1" className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000 scale-100 group-hover:scale-105" />
-                  </motion.div>
-                  
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16">
+                  <div className="flex flex-col gap-8 md:gap-16">
+                    <motion.div 
+                      initial={{ opacity: 0, y: 40 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true, margin: "-10%" }}
+                      transition={{ duration: 0.8 }}
+                      className="w-full overflow-hidden relative group"
+                    >
+                      <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[0]} alt="Process 1" className="w-full h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
+                    </motion.div>
+                    
+                    {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[1] && (
                     <motion.div 
                       initial={{ opacity: 0, y: 40 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true, margin: "-10%" }}
                       transition={{ duration: 0.8, delay: 0.1 }}
-                      className="w-full aspect-[4/5] overflow-hidden bg-charcoal/5 rounded-sm relative group"
+                      className="w-full overflow-hidden relative group"
                     >
-                      <img src={WORK_ITEMS.find(w => w.id === activeProject)?.image} alt="Process 2" className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000 object-left scale-100 group-hover:scale-105" />
+                      <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[1]} alt="Process 2" className="w-full h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
                     </motion.div>
-                    <motion.div 
-                      initial={{ opacity: 0, y: 40 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true, margin: "-10%" }}
-                      transition={{ duration: 0.8, delay: 0.2 }}
-                      className="w-full aspect-[4/5] overflow-hidden bg-charcoal/5 rounded-sm mt-0 md:mt-24 relative group"
-                    >
-                      <img src={WORK_ITEMS.find(w => w.id === activeProject)?.image} alt="Process 3" className="absolute inset-0 w-full h-full object-cover filter grayscale group-hover:grayscale-0 transition-all duration-1000 object-right scale-100 group-hover:scale-105" />
-                    </motion.div>
+                    )}
                   </div>
+
                 </div>
               </div>
+
+              <div className="w-full mt-16 md:mt-24 px-4 md:px-8 lg:px-12 max-w-[120rem] mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-16 items-center">
+                {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[3] && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.8, delay: 0.2 }}
+                    className="w-full md:col-span-5 overflow-hidden relative group flex items-center justify-center py-12 md:py-16"
+                  >
+                    <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[3]} alt="Process 4" className="w-[85%] h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
+                  </motion.div>
+                )}
+
+                {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[2] && (
+                  <motion.div 
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: "-10%" }}
+                    transition={{ duration: 0.8, delay: 0.3 }}
+                    className="w-full md:col-span-7 overflow-hidden relative group flex items-center justify-center"
+                  >
+                    <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[2]} alt="Process 3" className="w-full h-auto block transition-all duration-1000 scale-100 group-hover:scale-105" />
+                  </motion.div>
+                )}
+              </div>
+
+              {WORK_ITEMS.find(w => w.id === activeProject)?.processImages[4] && (
+                <motion.div 
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "-10%" }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                  className="w-full mt-16 md:mt-24 px-4 md:px-8 lg:px-12 max-w-[120rem] mx-auto overflow-hidden relative group"
+                >
+                  <img src={WORK_ITEMS.find(w => w.id === activeProject)?.processImages[4]} alt="Process 5" className="w-full h-auto object-cover transition-all duration-1000 scale-100 group-hover:scale-105" />
+                </motion.div>
+              )}
             </div>
           </motion.div>
           )}

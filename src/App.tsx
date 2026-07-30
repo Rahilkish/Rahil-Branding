@@ -4,6 +4,7 @@
  */
 
 import Hero from './components/Hero';
+import About from './components/About';
 import Work from './components/Work';
 import Archive from './components/Archive';
 import Process from './components/Process';
@@ -56,6 +57,7 @@ export default function App() {
       
       <main>
         <Hero />
+        <About />
         <Work />
         <Process />
         <Archive />
